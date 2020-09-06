@@ -47,7 +47,7 @@ public class P11ContainerWithMostWater {
 //                }
 //            }
 
-            // 2.双指针 左右边界i j,向中间收敛； 也叫 左右夹逼 O(N)
+            // 2.双指针 左右边界i j, 短的边向中间收敛； 也叫 左右夹逼 O(N)
 //            for (int i = 0, j = height.length - 1; i < j; ) {
 //                // 注意 height[i++] =分解两步=> height[i]; i++;
 //                int minHeight = height[i] < height[j] ? height[i++] : height[j--];
@@ -60,8 +60,8 @@ public class P11ContainerWithMostWater {
             int start = 0, end = height.length - 1;
             while (start < end) {
                 // 此处先计算后再使用i++、j--, 所以无需加 1
-                maxArea = Math.max(maxArea,
-                        height[start] < height[end] ? (end - start) * height[start++] : (end - start) * height[end--]);
+                int area = height[start] < height[end] ? (end - start) * height[start++] : (end - start) * height[end--];
+                maxArea = Math.max(maxArea, area);
             }
 
             return maxArea;

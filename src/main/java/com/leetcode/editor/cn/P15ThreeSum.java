@@ -32,7 +32,7 @@ public class P15ThreeSum {
     public static void main(String[] args) {
         Solution solution = new P15ThreeSum().new Solution();
         // TO TEST
-        int[] nums = new int[]{0,0,0,0};
+        int[] nums = new int[]{-4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
         System.out.println(solution.threeSum(nums));
 
     }
@@ -41,10 +41,15 @@ public class P15ThreeSum {
     class Solution {
         public List<List<Integer>> threeSum(int[] nums) {
 
+            List<List<Integer>> result = new ArrayList<>();
+            if (nums.length < 3) {
+                return result;
+            }
             // 方法一：暴力
-//            List<List<Integer>> result = new ArrayList<>();
+//            // 排序后方便去重
 //            Arrays.sort(nums);
 //            for (int i = 0; i < nums.length - 2; i++) {
+//                // 去重。排序后前后两项的值相同，只能记录一个
 //                if (i > 0 && nums[i] == nums[i - 1]) {
 //                    continue;
 //                }
@@ -66,43 +71,109 @@ public class P15ThreeSum {
 //                    }
 //                }
 //            }
-//            return result;
 
             // 方法二：两边夹
-            List<List<Integer>> result = new ArrayList<>();
+            // https://leetcode-cn.com/problems/3sum/solution/3sumpai-xu-shuang-zhi-zhen-yi-dong-by-jyd/
+//            Arrays.sort(nums);
+//            // 符号相同，则无解
+//            if (nums[0] > 0 || nums[nums.length - 1] < 0) {
+//                return result;
+//            }
+//
+//            for (int i = 0; i < nums.length - 2; i++) {
+//                // 符号相同，则无解
+//                if (nums[i] > 0) {
+//                    return result;
+//                }
+//                // 跳过相同的 i
+//                if (i > 0 && nums[i] == nums[i - 1]) {
+//                    continue;
+//                }
+//                int l = i + 1;
+//                int r = nums.length - 1;
+//                while (l < r) {
+//                    // 符号相同，则无解
+//                    if (nums[r] < 0) {
+//                        break;
+//                    }
+//
+//                    int sum = nums[l] + nums[r] + nums[i];
+//                    if (sum < 0) {
+//                        l++;
+//                    } else if (sum > 0) {
+//                        r--;
+//                    } else if (sum == 0) {
+//                        List<Integer> list = new ArrayList<>();
+//                        list.add(nums[i]);
+//                        list.add(nums[l]);
+//                        list.add(nums[r]);
+//                        result.add(list);
+//
+//                        // 跳过相同的 l
+//                        while (l < r && nums[l] == nums[l + 1]) {
+//                            l++;
+//                        }
+//                        // 跳过相同的 r
+//                        while (l < r && nums[r] == nums[r - 1]) {
+//                            r--;
+//                        }
+//                        l++;
+//                        r--;
+//                    }
+//                }
+//            }
+
             Arrays.sort(nums);
+            // 符号一样，则无解
+            if (nums[0] > 0 || nums[nums.length - 1] < 0)
+                return result;
+
             for (int i = 0; i < nums.length - 2; i++) {
-                if (i > 0 && nums[i] == nums[i - 1]) {
+                // 符号一样，则无解
+                if (nums[i] > 0)
+                    return result;
+                // 过滤重复 i
+                if (i > 0 && nums[i] == nums[i - 1])
                     continue;
-                }
-                int l = i + 1;
-                int r = nums.length - 1;
-                while (l < r) {
-                    int sum = nums[l] + nums[r] + nums[i];
-                    if (sum > 0) {
-                        r--;
-                    } else if (sum < 0) {
-                        l++;
-                    } else if (sum == 0) {
-                        List<Integer> list = new ArrayList<>();
+                int j = i + 1, k = nums.length - 1;
+                while (j < k) {
+                    // 符号一样，则无解
+                    if (nums[k] < 0)
+                        break;
+
+                    int sum = nums[i] + nums[j] + nums[k];
+                    if (sum < 0) {
+                        // 当sum < 0时，j += 1并跳过所有重复的nums[j]
+                        // TODO 为何会降低速度
+//                        while (j < k && nums[j] == nums[++j])
+//                            continue;
+                        j++;
+                    } else if (sum > 0) {
+                        // 当sum > 0时，k -= 1并跳过所有重复的nums[k]
+//                        while (j < k && nums[k] == nums[--k])
+//                            continue;
+                        k--;
+                    } else {
+                        // 当sum == 0时，记录组合[i, j, k]result，
+                        List<Integer> list = new ArrayList<>(3);
                         list.add(nums[i]);
-                        list.add(nums[l]);
-                        list.add(nums[r]);
+                        list.add(nums[j]);
+                        list.add(nums[k]);
                         result.add(list);
 
-                        while (l < r && nums[l] == nums[l + 1]) {
-                            l++;
-                        }
-                        while (l < r && nums[r] == nums[r - 1]) {
-                            r--;
-                        }
-                        l++;
-                        r--;
+                        // 执行j += 1和k -= 1，并跳过所有重复的nums[j]和nums[k]，防止记录到重复组合
+                        while (j < k && nums[j] == nums[j + 1])
+                            j++;
+                        while (j < k && nums[k] == nums[k - 1])
+                            k--;
+                        j++;
+                        k--;
                     }
                 }
-            }
-            return result;
 
+            }
+
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

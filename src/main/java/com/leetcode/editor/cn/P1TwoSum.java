@@ -34,7 +34,7 @@ public class P1TwoSum {
     class Solution {
         public int[] twoSum(int[] nums, int target) {
 
-            // 方法一：暴力
+            // 1：暴力
 //            for (int i = 0; i < nums.length-1; i++) {
 //                for (int j = i + 1; j < nums.length; j++) {
 //                    if (nums[i] + nums[j] == target) {
@@ -44,7 +44,7 @@ public class P1TwoSum {
 //            }
 //            return null;
 
-            // HashMap
+            // 2.哈希表 HashMap
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
                 int complement = target - nums[i];

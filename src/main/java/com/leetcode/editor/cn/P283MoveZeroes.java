@@ -64,7 +64,9 @@ public class P283MoveZeroes {
                     index++;
                 }
             }
+
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
