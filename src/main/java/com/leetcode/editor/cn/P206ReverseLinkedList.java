@@ -44,16 +44,21 @@ public class P206ReverseLinkedList {
 class Solution {
     public ListNode reverseList(ListNode head) {
 
+        // 1.迭代反转
         ListNode prev = null;
         ListNode curr = head;
         while (curr != null) {
-            ListNode nextTemp = curr.next;
+            ListNode temp = curr.next;
+            // 前一个节点 作为 当前节点的下一个节点 —— 反转
             curr.next = prev;
+            // 当前节点 作为 下一次的当前节点的 前一个节点
             prev = curr;
-            curr = nextTemp;
+            // 下一个节点 作为 下一次的当前节点
+            curr = temp;
         }
 
         return prev;
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
