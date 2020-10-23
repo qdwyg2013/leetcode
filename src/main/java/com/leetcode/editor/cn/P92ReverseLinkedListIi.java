@@ -12,6 +12,8 @@
 
 package com.leetcode.editor.cn;
 
+import java.util.List;
+
 /**
  * java:[92]反转链表 II
  */

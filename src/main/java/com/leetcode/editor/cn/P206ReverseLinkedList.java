@@ -48,6 +48,19 @@ class Solution {
         ListNode prev = null;
         ListNode curr = head;
         while (curr != null) {
+            /*
+                null->a->b->c
+                curr = a
+                a->null, a(prev)->b(curr)
+
+                curr = b
+                b->a, b(prev)->c(curr)
+                (b->a->null)
+
+                curr = c
+                c->b, c(prev)->null(curr)
+                (c->b->a->null)
+             */
             ListNode temp = curr.next;
             // 前一个节点 作为 当前节点的下一个节点 —— 反转
             curr.next = prev;

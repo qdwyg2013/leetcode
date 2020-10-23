@@ -51,7 +51,7 @@ public class P11ContainerWithMostWater {
 //            for (int i = 0, j = height.length - 1; i < j; ) {
 //                // 注意 height[i++] =分解两步=> height[i]; i++;
 //                int minHeight = height[i] < height[j] ? height[i++] : height[j--];
-//                // 上一步的 i++ 导致 i 多了1步，所以做差时少了 1
+//                // 上一步的 i++ 导致 i 多了1步(或 j-- 导致 j 少了1步)，所以做差时少了 1
 //                int area = minHeight * (j - i + 1);
 //                maxArea = Math.max(area, maxArea);
 //            }

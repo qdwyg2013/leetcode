@@ -92,7 +92,7 @@ public class P141LinkedListCycle {
             ListNode slow = head;
             ListNode fast = head.next;
             while (slow != fast) {
-                // 只有第一个节点slow、fast才有可能同时为null。所以此处无需考虑null==slow
+                // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑null==slow
                 if (null == fast || null == fast.next) {
                     return false;
                 }

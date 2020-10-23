@@ -42,11 +42,11 @@ public class P15ThreeSum {
         public List<List<Integer>> threeSum(int[] nums) {
 
             List<List<Integer>> result = new ArrayList<>();
-            if (nums.length < 3) {
+            if (null == nums || nums.length < 3) {
                 return result;
             }
             // 方法一：暴力
-//            // 排序后方便去重
+//            // 从小到大排序后方便去重
 //            Arrays.sort(nums);
 //            for (int i = 0; i < nums.length - 2; i++) {
 //                // 去重。排序后前后两项的值相同，只能记录一个
@@ -72,53 +72,67 @@ public class P15ThreeSum {
 //                }
 //            }
 
-            // 方法二：两边夹
-            // https://leetcode-cn.com/problems/3sum/solution/3sumpai-xu-shuang-zhi-zhen-yi-dong-by-jyd/
+            // 方法二：双指针法  两边夹
+//            // https://leetcode-cn.com/problems/3sum/solution/3sumpai-xu-shuang-zhi-zhen-yi-dong-by-jyd/
 //            Arrays.sort(nums);
 //            // 符号相同，则无解
 //            if (nums[0] > 0 || nums[nums.length - 1] < 0) {
 //                return result;
 //            }
 //
-//            for (int i = 0; i < nums.length - 2; i++) {
+//            for (int k = 0; k < nums.length - 2; k++) {
 //                // 符号相同，则无解
-//                if (nums[i] > 0) {
+//                if (nums[k] > 0) {
 //                    return result;
 //                }
 //                // 跳过相同的 i
-//                if (i > 0 && nums[i] == nums[i - 1]) {
+//                // 当 k > 0且nums[k] == nums[k - 1]时即跳过此元素nums[k]：因为已经将 nums[k - 1] 的所有组合加入到结果中，本次双指针搜索只会得到重复组合。
+//                if (k > 0 && nums[k] == nums[k - 1]) {
 //                    continue;
 //                }
-//                int l = i + 1;
-//                int r = nums.length - 1;
-//                while (l < r) {
+//                int i = k + 1;
+//                int j = nums.length - 1;
+//                while (i < j) {
 //                    // 符号相同，则无解
-//                    if (nums[r] < 0) {
+//                    if (nums[j] < 0) {
 //                        break;
 //                    }
 //
-//                    int sum = nums[l] + nums[r] + nums[i];
-//                    if (sum < 0) {
-//                        l++;
-//                    } else if (sum > 0) {
-//                        r--;
-//                    } else if (sum == 0) {
+//                    /*
+//                        当s < 0时，i += 1并跳过所有重复的nums[i]；
+//                        当s > 0时，j -= 1并跳过所有重复的nums[j]；
+//                        当s == 0时，记录组合[k, i, j]至res，执行i += 1和j -= 1并跳过所有重复的nums[i]和nums[j]，防止记录到重复组合。
+//                     */
+//                    int s = nums[i] + nums[j] + nums[k];
+//                    if (s < 0) {
+//                        i++;
+//                        // 跳过相同的 l
+//                        while (i < j && nums[i] == nums[i - 1]) {
+//                            i++;
+//                        }
+//                    } else if (s > 0) {
+//                        j--;
+//                        // 跳过相同的 r
+//                        while (i < j && nums[j] == nums[j + 1]) {
+//                            j--;
+//                        }
+//                    } else if (s == 0) {
 //                        List<Integer> list = new ArrayList<>();
+//                        list.add(nums[k]);
 //                        list.add(nums[i]);
-//                        list.add(nums[l]);
-//                        list.add(nums[r]);
+//                        list.add(nums[j]);
 //                        result.add(list);
 //
+//                        i++;
+//                        j--;
 //                        // 跳过相同的 l
-//                        while (l < r && nums[l] == nums[l + 1]) {
-//                            l++;
+//                        while (i < j && nums[i] == nums[i - 1]) {
+//                            i++;
 //                        }
 //                        // 跳过相同的 r
-//                        while (l < r && nums[r] == nums[r - 1]) {
-//                            r--;
+//                        while (i < j && nums[j] == nums[j + 1]) {
+//                            j--;
 //                        }
-//                        l++;
-//                        r--;
 //                    }
 //                }
 //            }
@@ -145,13 +159,11 @@ public class P15ThreeSum {
                     if (sum < 0) {
                         // 当sum < 0时，j += 1并跳过所有重复的nums[j]
                         // TODO 为何会降低速度
-//                        while (j < k && nums[j] == nums[++j])
-//                            continue;
+//                        while (j < k && nums[j] == nums[++j]){}
                         j++;
                     } else if (sum > 0) {
                         // 当sum > 0时，k -= 1并跳过所有重复的nums[k]
-//                        while (j < k && nums[k] == nums[--k])
-//                            continue;
+//                        while (j < k && nums[k] == nums[--k]){}
                         k--;
                     } else {
                         // 当sum == 0时，记录组合[i, j, k]result，
@@ -162,12 +174,8 @@ public class P15ThreeSum {
                         result.add(list);
 
                         // 执行j += 1和k -= 1，并跳过所有重复的nums[j]和nums[k]，防止记录到重复组合
-                        while (j < k && nums[j] == nums[j + 1])
-                            j++;
-                        while (j < k && nums[k] == nums[k - 1])
-                            k--;
-                        j++;
-                        k--;
+                        while (j < k && nums[j] == nums[++j]){}
+                        while (j < k && nums[k] == nums[--k]){}
                     }
                 }
 

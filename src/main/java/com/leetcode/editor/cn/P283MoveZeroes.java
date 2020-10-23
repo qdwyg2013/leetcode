@@ -50,18 +50,18 @@ public class P283MoveZeroes {
 //            }
 
             // 2.双指针 位置置换
-            int index = 0;
+            // 记录第一个0的位置
+            int zeroIndex = 0;
             for (int i = 0; i < nums.length; i++) {
                 if (nums[i] != 0) {
-                    if (i != index) {
+                    if (i != zeroIndex) {
 //                    // 或 因为i 肯定大约 index
 //                    if (i > index) {
-                        nums[index] = nums[i];
+                        // 非0放在第一个0的位置，非0位置设置为0
+                        nums[zeroIndex] = nums[i];
                         nums[i] = 0;
-                        // 或 因为nums[index]=0
-//                        nums[i] = nums[index];
                     }
-                    index++;
+                    zeroIndex++;
                 }
             }
 

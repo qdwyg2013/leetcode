@@ -16,6 +16,7 @@
 
 package com.leetcode.editor.cn;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class P1TwoSum {
     class Solution {
         public int[] twoSum(int[] nums, int target) {
 
-            // 1：暴力
+            // 1：暴力 - 枚举 O(n^2)
 //            for (int i = 0; i < nums.length-1; i++) {
 //                for (int j = i + 1; j < nums.length; j++) {
 //                    if (nums[i] + nums[j] == target) {
@@ -45,6 +46,7 @@ public class P1TwoSum {
 //            return null;
 
             // 2.哈希表 HashMap
+            // 因为返回的是下标值，所以不能排序打乱顺序
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
                 int complement = target - nums[i];
@@ -53,6 +55,7 @@ public class P1TwoSum {
                 }
                 map.put(nums[i], i);
             }
+
             return null;
         }
     }
