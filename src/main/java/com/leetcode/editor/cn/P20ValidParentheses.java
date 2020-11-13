@@ -44,10 +44,7 @@ package com.leetcode.editor.cn;
 
 import org.apache.logging.log4j.util.Strings;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * java:[20]有效的括号
@@ -57,7 +54,7 @@ public class P20ValidParentheses {
     public static void main(String[] args) {
         Solution solution = new P20ValidParentheses().new Solution();
         // TO TEST
-        System.out.println(solution.isValid("]"));
+        System.out.println(solution.isValid("){"));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -86,31 +83,24 @@ public class P20ValidParentheses {
             }
 
             Map<Character, Character> map = new HashMap<>();
-            map.put('(', ')');
-            map.put('[', ']');
-            map.put('{', '}');
+            map.put(')', '(');
+            map.put(']', '[');
+            map.put('}', '{');
 
             Stack<Character> stack = new Stack<>();
             for (int i = 0; i < s.length(); i++) {
                 char chatat = s.charAt(i);
                 if (map.containsKey(chatat)) {
-                    if (map.get(chatat).equals(stack.pop())){
-
+                    if (stack.isEmpty() || !map.get(chatat).equals(stack.peek())) {
+                        return false;
                     }
-
-                }
-                if (chatat == '(') {
+                    stack.pop();
+                } else {
                     stack.push(chatat);
-                } else if (chatat == '[') {
-                    stack.push(chatat);
-                } else if (chatat == '{') {
-                    stack.push(chatat);
-                } else if (stack.isEmpty() || chatat != stack.pop()) {
-                    return false;
                 }
             }
 
-            if (stack.empty()) {
+            if (stack.isEmpty()) {
                 return true;
             }
             return false;

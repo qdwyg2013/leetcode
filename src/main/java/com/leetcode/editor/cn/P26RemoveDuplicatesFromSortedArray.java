@@ -58,7 +58,7 @@ public class P26RemoveDuplicatesFromSortedArray {
     public static void main(String[] args) {
         Solution solution = new P26RemoveDuplicatesFromSortedArray().new Solution();
         // TO TEST
-        int[] nums = new int[]{1, 1, 2};
+        int[] nums = new int[]{1, 1, 2, 3, 4, 4, 5};
         int count = solution.removeDuplicates(nums);
         System.out.println(count + "; " + Arrays.toString(nums));
     }
@@ -70,6 +70,7 @@ public class P26RemoveDuplicatesFromSortedArray {
             // 解法： 双指针
             int i = 0;
             for (int j = 1; j < nums.length; j++) {
+                // 不等的值前移
                 if (nums[j] != nums[i]) {
                     i++;
                     if (j - i > 0) {
@@ -77,7 +78,6 @@ public class P26RemoveDuplicatesFromSortedArray {
                     }
                 }
             }
-
 
             return i + 1;
         }

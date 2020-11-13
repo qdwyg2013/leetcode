@@ -69,11 +69,16 @@ public class P24SwapNodesInPairs {
             int index = 1;
             ListNode prev = null;
             ListNode curr = head;
+            ListNode even = null;
+            ListNode odd = head;
             while (curr != null) {
                 if (index % 2 == 0) {
                     ListNode tempNode = curr.next;
 
                 } else {
+                    ListNode temp = curr.next.next;
+                    curr= curr.next;
+                    curr.next = temp;
                     prev = curr;
                     curr = curr.next;
                 }

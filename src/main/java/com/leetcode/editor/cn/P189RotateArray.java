@@ -51,12 +51,14 @@ public class P189RotateArray {
     class Solution {
         public void rotate(int[] nums, int k) {
 
-            // 方法一
+            // 方法一：移动
 //            for (int i = 0; i < k; i++) {
 //                int lastNum = nums[nums.length - 1];
+//                // 前n-1个往后移动一位
 //                for (int j = nums.length - 2; j >= 0; j--) {
 //                    nums[j + 1] = nums[j];
 //                }
+//                // 将最后一位赋值给第一个位置
 //                nums[0] = lastNum;
 //            }
 
@@ -67,6 +69,13 @@ public class P189RotateArray {
             reverse(nums, k, nums.length - 1);
         }
 
+        /**
+         * 前后互换位置
+         *
+         * @param nums
+         * @param start
+         * @param end
+         */
         public void reverse(int[] nums, int start, int end) {
 
             while (start < end) {
