@@ -43,7 +43,7 @@ public class P70ClimbingStairs {
     public static void main(String[] args) {
         Solution solution = new P70ClimbingStairs().new Solution();
         // TO TEST
-
+        System.out.println(solution.iteration(5));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -66,6 +66,21 @@ public class P70ClimbingStairs {
 
         }
 
+        /**
+         * 迭代的方式
+         */
+        private int iteration(int n) {
+            System.out.println("--------" + n);
+            if (n == 1) {
+                return 1;
+            }
+            if (n == 2) {
+                return 2;
+            }
+
+            int result = iteration(n - 1) + iteration(n - 2);
+            return result;
+        }
 
     }
 //leetcode submit region end(Prohibit modification and deletion)

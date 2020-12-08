@@ -71,13 +71,14 @@ public class P141LinkedListCycle {
     public class Solution {
         public boolean hasCycle(ListNode head) {
 
-            // 1.哈希表
+            // 1.哈希表（无重复）
 //            Set<ListNode> listNodeSet = new HashSet<>();
 //            while (head != null) {
 //                if (listNodeSet.contains(head)) {
 //                    return true;
 //                }
 //                listNodeSet.add(head);
+//                // 前进一个节点
 //                head = head.next;
 //            }
 //
@@ -89,15 +90,23 @@ public class P141LinkedListCycle {
                 return false;
             }
 
+            // 获取快慢指针相遇点
             ListNode slow = head;
-            ListNode fast = head.next;
-            while (slow != fast) {
+            ListNode fast = head;
+            while (true) {
                 // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑null==slow
                 if (null == fast || null == fast.next) {
                     return false;
                 }
+                // 前进一个节点
                 slow = slow.next;
+                // 前进两个节点
                 fast = fast.next.next;
+
+                // 获取快慢指针相遇点
+                if (slow == fast) {
+                    break;
+                }
             }
 
             return true;

@@ -1,6 +1,6 @@
-//给定一个二叉树，返回它的中序 遍历。 
+//给定一个二叉树，返回它的 后序 遍历。
 //
-// 示例: 
+// 示例:
 //
 // 输入: [1,null,2,3]
 //   1
@@ -9,11 +9,11 @@
 //    /
 //   3
 //
-//输出: [1,3,2] 
+//输出: [3,2,1]
 //
-// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？ 
-// Related Topics 栈 树 哈希表 
-// 👍 759 👎 0
+// 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+// Related Topics 栈 树
+// 👍 486 👎 0
 
 package com.leetcode.editor.cn;
 
@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * java:[94]二叉树的中序遍历
+ * java:[145]二叉树的后序遍历
  */
-public class P94BinaryTreeInorderTraversal {
+public class P145BinaryTreePostorderTraversal {
 
     public static void main(String[] args) {
-        Solution solution = new P94BinaryTreeInorderTraversal().new Solution();
+        Solution solution = new P145BinaryTreePostorderTraversal().new Solution();
         // TO TEST
 
     }
@@ -49,33 +49,32 @@ public class P94BinaryTreeInorderTraversal {
      * }
      */
     class Solution {
-
-        public List<Integer> inorderTraversal(TreeNode root) {
+        public List<Integer> postorderTraversal(TreeNode root) {
 
             List<Integer> result = new ArrayList<>();
-
-            // 方法一：递归
             inorders(root, result);
-
             return result;
         }
 
-        public void inorders(TreeNode root, List<Integer> result) {
-            // root节点为null，则结束迭代
+        private void inorders(TreeNode root, List<Integer> result) {
+
+            // recursion termination
             if (null == root) {
                 return;
             }
 
-            // 中序遍历：左-根-右
-            // 遍历左节点
+            // 后序遍历：左-右-根
+            // process login in current level
+
+            // drill down
             inorders(root.left, result);
-            // 左节点为null时，将根root节点值添加到result集合中
-            result.add(root.val);
-            // 遍历右节点
             inorders(root.right, result);
+
+            result.add(root.val);
+
+            // reverse the current level status if needed
+
         }
-
-
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -49,6 +49,7 @@ class Solution {
         ListNode curr = head;
         while (curr != null) {
             /*
+                每次反转一个箭头 ->
                 null->a->b->c
                 curr = a
                 a->null, a(prev)->b(curr)
