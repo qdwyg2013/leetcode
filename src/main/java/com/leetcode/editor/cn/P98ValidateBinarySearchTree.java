@@ -34,6 +34,9 @@
 
 package com.leetcode.editor.cn;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * java:[98]验证二叉搜索树
  */
@@ -42,30 +45,54 @@ public class P98ValidateBinarySearchTree {
     public static void main(String[] args) {
         Solution solution = new P98ValidateBinarySearchTree().new Solution();
         // TO TEST
-        
+
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public boolean isValidBST(TreeNode root) {
 
+    /**
+     * Definition for a binary tree node.
+     * public class TreeNode {
+     * int val;
+     * TreeNode left;
+     * TreeNode right;
+     * TreeNode() {}
+     * TreeNode(int val) { this.val = val; }
+     * TreeNode(int val, TreeNode left, TreeNode right) {
+     * this.val = val;
+     * this.left = left;
+     * this.right = right;
+     * }
+     * }
+     */
+    class Solution {
+
+        public boolean isValidBST(TreeNode root) {
+
+            // 方法一：中序遍历。 先中序遍历后获得结果集，再查看是否为升序
+            List<Integer> list = new LinkedList<>();
+            inorders(root, list);
+            for (int i = 1; i < list.size(); i++) {
+                if (list.get(i - 1) >= list.get(i)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void inorders(TreeNode root, List<Integer> list) {
+
+            if (null == root) {
+                return;
+            }
+
+            // 中序遍历
+            inorders(root.left, list);
+            list.add(root.val);
+            inorders(root.right, list);
+        }
     }
-}
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
