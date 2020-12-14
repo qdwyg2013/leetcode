@@ -1,4 +1,6 @@
 HELP.md
+all.json
+translation.json
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +33,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### mac ###
+.DS_Store
