@@ -16,7 +16,7 @@
 // Related Topics 字符串 回溯算法 
 // 👍 1459 👎 0
 
-package com.dangdang.web.service.impl;
+package com.leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.List;
