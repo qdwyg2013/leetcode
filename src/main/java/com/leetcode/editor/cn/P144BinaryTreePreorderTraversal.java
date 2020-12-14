@@ -54,10 +54,10 @@
 
 package com.leetcode.editor.cn;
 
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * java:[144]二叉树的前序遍历
@@ -90,10 +90,35 @@ public class P144BinaryTreePreorderTraversal {
     class Solution {
 
         public List<Integer> preorderTraversal(TreeNode root) {
-
             List<Integer> result = new ArrayList<>();
+            if (null == root) {
+                return result;
+            }
+
             // 方法一：递归
-            inorders(root, result);
+//            inorders(root, result);
+
+            // 方法二：迭代 - 栈
+            Stack<TreeNode> stack = new Stack<>();
+            // 入栈：根 + 右 - 左；出栈：根 + 左 - 右
+            // 根节点入栈
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                // 存入结果集
+                result.add(node.val);
+
+                // 右节点先入栈——先进后出
+                if (null != node.right) {
+                    stack.push(node.right);
+                }
+
+                // 左节点后入栈——后进先出。所以先pop出左节点
+                if (null != node.left) {
+                    stack.push(node.left);
+                }
+
+            }
 
             return result;
         }

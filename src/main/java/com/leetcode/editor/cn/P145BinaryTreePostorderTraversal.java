@@ -19,6 +19,7 @@ package com.leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * java:[145]二叉树的后序遍历
@@ -50,9 +51,49 @@ public class P145BinaryTreePostorderTraversal {
      */
     class Solution {
         public List<Integer> postorderTraversal(TreeNode root) {
-
             List<Integer> result = new ArrayList<>();
-            inorders(root, result);
+
+            if (null == root) {
+                return result;
+            }
+
+            // 方法一：递归
+//            inorders(root, result);
+
+            // 方法二：迭代 - 栈
+            /*
+                前序遍历：根-左-右
+                入栈时 根 + 右 - 左；出栈 根 + 左 - 右 （根提前处理）
+
+                后序遍历：左-右-根
+                入栈时 根 + 左 - 右；出栈 右 - 左 - 根 （根不提前处理）
+             */
+
+            Stack<TreeNode> stack1 = new Stack<>();
+            stack1.push(root);
+
+            Stack<TreeNode> stack2 = new Stack<>();
+            while (!stack1.isEmpty()) {
+                TreeNode node = stack1.pop();
+
+                // 入结果栈。根 + 左 - 右
+                stack2.push(node);
+
+                // 左 入栈
+                if (null != node.left) {
+                    stack1.push(node.left);
+                }
+                // 右 入栈
+                if (null != node.right) {
+                    stack1.push(node.right);
+                }
+            }
+
+            // 结果栈数据反转
+            while (!stack2.isEmpty()) {
+                result.add(stack2.pop().val);
+            }
+
             return result;
         }
 
