@@ -12,10 +12,6 @@
 
 package com.leetcode.editor.cn;
 
-import javafx.beans.binding.When;
-
-import java.util.List;
-
 /**
  * java:[206]反转链表
  */
@@ -24,29 +20,29 @@ public class P206ReverseLinkedList {
     public static void main(String[] args) {
         Solution solution = new P206ReverseLinkedList().new Solution();
         // TO TEST
-        ListNode test = new ListNode(1);
-        test.next = new ListNode(2);
-        test.next.next = new ListNode(3);
-        test.next.next.next = new ListNode(4);
-        test.next.next.next.next = new ListNode(5);
+        LinkedNode test = new LinkedNode(1);
+        test.next = new LinkedNode(2);
+        test.next.next = new LinkedNode(3);
+        test.next.next.next = new LinkedNode(4);
+        test.next.next.next.next = new LinkedNode(5);
         System.out.println(solution.reverseList(test));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
- * public class ListNode {
+ * public class LinkedNode {
  *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
+ *     LinkedNode next;
+ *     LinkedNode(int x) { val = x; }
  * }
  */
 class Solution {
-    public ListNode reverseList(ListNode head) {
+    public LinkedNode reverseList(LinkedNode head) {
 
         // 1.迭代反转
-        ListNode prev = null;
-        ListNode curr = head;
+        LinkedNode prev = null;
+        LinkedNode curr = head;
         while (curr != null) {
             /*
                 每次反转一个箭头 ->
@@ -62,7 +58,7 @@ class Solution {
                 c->b, c(prev)->null(curr)
                 (c->b->a->null)
              */
-            ListNode temp = curr.next;
+            LinkedNode temp = curr.next;
             // 前一个节点 作为 当前节点的下一个节点 —— 反转
             curr.next = prev;
             // 当前节点 作为 下一次的当前节点的 前一个节点

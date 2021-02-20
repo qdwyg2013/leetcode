@@ -12,8 +12,6 @@
 
 package com.leetcode.editor.cn;
 
-import java.util.List;
-
 /**
  * java:[92]反转链表 II
  */
@@ -22,11 +20,11 @@ public class P92ReverseLinkedListIi {
     public static void main(String[] args) {
         Solution solution = new P92ReverseLinkedListIi().new Solution();
         // TO TEST
-        ListNode test = new ListNode(3);
-//        test.next = new ListNode(5);
-//        test.next.next = new ListNode(3);
-//        test.next.next.next = new ListNode(4);
-//        test.next.next.next.next = new ListNode(5);
+        LinkedNode test = new LinkedNode(3);
+//        test.next = new LinkedNode(5);
+//        test.next.next = new LinkedNode(3);
+//        test.next.next.next = new LinkedNode(4);
+//        test.next.next.next.next = new LinkedNode(5);
         System.out.println(solution.reverseBetween(test, 1, 1));
     }
 
@@ -34,22 +32,22 @@ public class P92ReverseLinkedListIi {
 
     /**
      * Definition for singly-linked list.
-     * public class ListNode {
+     * public class LinkedNode {
      * int val;
-     * ListNode next;
-     * ListNode(int x) { val = x; }
+     * LinkedNode next;
+     * LinkedNode(int x) { val = x; }
      * }
      */
     class Solution {
-        public ListNode reverseBetween(ListNode head, int m, int n) {
+        public LinkedNode reverseBetween(LinkedNode head, int m, int n) {
 
             // 迭代连接反转
             if (null == head) {
                 return null;
             }
 
-            ListNode prev = null;
-            ListNode curr = head;
+            LinkedNode prev = null;
+            LinkedNode curr = head;
             // 1.前移m
             // prev为第m-1个节点，curr为第m个节点
             // 结果：m=1，n=n-m+1
@@ -62,12 +60,12 @@ public class P92ReverseLinkedListIi {
 
             // 2.反转节点间指向
             // 第m-1个节点 作为反转后的 prev
-            ListNode con = prev;
+            LinkedNode con = prev;
             // 第m个节点 作为反转的尾部
-            ListNode tail = curr;
+            LinkedNode tail = curr;
             while (n > 0) {
                 // 反转四步法
-                ListNode temp = curr.next;
+                LinkedNode temp = curr.next;
                 curr.next = prev;
                 prev = curr;
                 curr = temp;

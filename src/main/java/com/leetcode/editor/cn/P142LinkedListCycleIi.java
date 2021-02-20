@@ -57,9 +57,6 @@
 
 package com.leetcode.editor.cn;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * java:[142]环形链表 II
  */
@@ -75,20 +72,20 @@ public class P142LinkedListCycleIi {
 
     /**
      * Definition for singly-linked list.
-     * class ListNode {
+     * class LinkedNode {
      * int val;
-     * ListNode next;
-     * ListNode(int x) {
+     * LinkedNode next;
+     * LinkedNode(int x) {
      * val = x;
      * next = null;
      * }
      * }
      */
     public class Solution {
-        public ListNode detectCycle(ListNode head) {
+        public LinkedNode detectCycle(LinkedNode head) {
 
             // 1.哈希表（无重复）
-//        Set<ListNode> listNodeSet = new HashSet<>();
+//        Set<LinkedNode> listNodeSet = new HashSet<>();
 //        while (null != head) {
 //            // 遇到的第一个遍历过的节点必然是入环点
 //            if (listNodeSet.contains(head)) {
@@ -121,8 +118,8 @@ public class P142LinkedListCycleIi {
             }
 
             // 获取快慢指针相遇点
-            ListNode slow = head;
-            ListNode fast = head;
+            LinkedNode slow = head;
+            LinkedNode fast = head;
             while (true) {
                 if (null == fast || null == fast.next) {
                     return null;
@@ -137,7 +134,7 @@ public class P142LinkedListCycleIi {
             }
 
             // 获取入环点
-            ListNode ptr = head;
+            LinkedNode ptr = head;
             while (ptr != slow) {
                 ptr = ptr.next;
                 slow = slow.next;

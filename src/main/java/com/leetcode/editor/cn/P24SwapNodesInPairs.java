@@ -38,8 +38,6 @@
 
 package com.leetcode.editor.cn;
 
-import java.util.List;
-
 /**
  * java:[24]两两交换链表中的节点
  */
@@ -55,28 +53,28 @@ public class P24SwapNodesInPairs {
 
     /**
      * Definition for singly-linked list.
-     * public class ListNode {
+     * public class LinkedNode {
      * int val;
-     * ListNode next;
-     * ListNode() {}
-     * ListNode(int val) { this.val = val; }
-     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+     * LinkedNode next;
+     * LinkedNode() {}
+     * LinkedNode(int val) { this.val = val; }
+     * LinkedNode(int val, LinkedNode next) { this.val = val; this.next = next; }
      * }
      */
     class Solution {
-        public ListNode swapPairs(ListNode head) {
+        public LinkedNode swapPairs(LinkedNode head) {
 
             int index = 1;
-            ListNode prev = null;
-            ListNode curr = head;
-            ListNode even = null;
-            ListNode odd = head;
+            LinkedNode prev = null;
+            LinkedNode curr = head;
+            LinkedNode even = null;
+            LinkedNode odd = head;
             while (curr != null) {
                 if (index % 2 == 0) {
-                    ListNode tempNode = curr.next;
+                    LinkedNode tempNode = curr.next;
 
                 } else {
-                    ListNode temp = curr.next.next;
+                    LinkedNode temp = curr.next.next;
                     curr= curr.next;
                     curr.next = temp;
                     prev = curr;

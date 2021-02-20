@@ -29,16 +29,16 @@
 //    //leetcode submit region begin(Prohibit modification and deletion)
 ///**
 // * Definition for singly-linked list.
-// * public class ListNode {
+// * public class LinkedNode {
 // *     int val;
-// *     ListNode next;
-// *     ListNode() {}
-// *     ListNode(int val) { this.val = val; }
-// *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+// *     LinkedNode next;
+// *     LinkedNode() {}
+// *     LinkedNode(int val) { this.val = val; }
+// *     LinkedNode(int val, LinkedNode next) { this.val = val; this.next = next; }
 // * }
 // */
 //class Solution {
-//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//    public LinkedNode addTwoNumbers(LinkedNode l1, LinkedNode l2) {
 //
 //    }
 //}
