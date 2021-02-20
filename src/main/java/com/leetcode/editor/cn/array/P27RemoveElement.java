@@ -52,6 +52,7 @@ package com.leetcode.editor.cn.array;
 
 /**
  * java:[27]移除元素
+ * 本质上即不等于val的元素前移
  */
 public class P27RemoveElement {
 
@@ -75,7 +76,7 @@ public class P27RemoveElement {
 //                    for (int j = i + 1; j < size; j++) {
 //                        nums[j - 1] = nums[j];
 //                    }
-//                    // 因为下标i以后的数值都向前移动了一位，所以i也向前移动一位
+//                    // 因为下标i以后的数值都向前移动了一位，覆盖了i位置的元素，所以i位置的元素需要重新检查，故先-1，因为在for循环中又+1
 //                    i--;
 //                    // 此时数组的大小-1 !!!(重要-循环时使用的数组大小为动态的size)
 //                    size--;
@@ -90,7 +91,7 @@ public class P27RemoveElement {
             int slowIndex = 0;
             for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
                 if (nums[fastIndex] != val) {
-                    // 因为在出现等于之前slowIndex==fastIndex，所以无需赋值操作nums[slowIndex] = nums[fastIndex]
+                    // 因为在出现等于val之前slowIndex==fastIndex，所以无需赋值操作nums[slowIndex] = nums[fastIndex]
                     if (fastIndex > slowIndex) {
                         nums[slowIndex] = nums[fastIndex];
                     }
