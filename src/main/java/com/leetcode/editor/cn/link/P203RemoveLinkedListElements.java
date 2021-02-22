@@ -10,6 +10,8 @@
 
 package com.leetcode.editor.cn.link;
 
+import com.leetcode.editor.cn.ListNode;
+
 /**
  * java:[203]移除链表元素
  */
@@ -25,22 +27,22 @@ public class P203RemoveLinkedListElements {
 
     /**
      * Definition for singly-linked list.
-     * public class LinkedNode {
+     * public class ListNode {
      * int val;
-     * LinkedNode next;
-     * LinkedNode() {}
-     * LinkedNode(int val) { this.val = val; }
-     * LinkedNode(int val, LinkedNode next) { this.val = val; this.next = next; }
+     * ListNode next;
+     * ListNode() {}
+     * ListNode(int val) { this.val = val; }
+     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      * }
      */
     class Solution {
-        public LinkedNode removeElements(LinkedNode head, int val) {
+        public ListNode removeElements(ListNode head, int val) {
 
             /*
                 删除节点：
                         curr.next = curr.next.next; // 即将当前节点的next指针 指向 当前节点的下下个节点)
                 添加节点：
-                        LinkedNode temp = curr.next;
+                        ListNode temp = curr.next;
                         curr.next = newNode;
                         newNode.next = temp;
              */
@@ -51,7 +53,7 @@ public class P203RemoveLinkedListElements {
 //            }
 //
 //            // 再删除非头结点
-//            LinkedNode curr = head;
+//            ListNode curr = head;
 //            while (curr.next != null) {
 //                if (curr.next.val == val) {
 //                    curr.next = curr.next.next;
@@ -64,11 +66,11 @@ public class P203RemoveLinkedListElements {
 
             // 方法二：设置一个虚拟头结点在进行移除节点操作(不需单独考虑头结点的删除)
             // 设置一个虚拟头结点
-            LinkedNode dummyHead = new LinkedNode(0);
+            ListNode dummyHead = new ListNode(0);
             // 将虚拟头结点指向head，这样后面做删除操作就不需要单独对头结点做删除了
             dummyHead.next = head;
 
-            LinkedNode curr = dummyHead;
+            ListNode curr = dummyHead;
             while (curr.next != null) {
                 if (curr.next.val == val) {
                     curr.next = curr.next.next;

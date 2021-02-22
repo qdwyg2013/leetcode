@@ -39,6 +39,8 @@
 
 package com.leetcode.editor.cn.link;
 
+import com.leetcode.editor.cn.ListNode;
+
 /**
  * java:[707]设计链表
  */
@@ -58,22 +60,7 @@ public class P707DesignLinkedList {
     //leetcode submit region begin(Prohibit modification and deletion)
     class MyLinkedList {
 
-        class LinkedNode {
-            /**
-             * 节点上存储的元素
-             */
-            int val;
-            /**
-             * 指向下一个节点的指针
-             */
-            LinkedNode next;
-
-            LinkedNode(int val) {
-                this.val = val;
-            }
-        }
-
-        private LinkedNode dummyHead;
+        private ListNode dummyHead;
         private int size;
 
         /**
@@ -81,7 +68,7 @@ public class P707DesignLinkedList {
          */
         public MyLinkedList() {
             // 这里定义的头结点 是一个虚拟头结点，而不是真正的链表头结点
-            dummyHead = new LinkedNode(0);
+            dummyHead = new ListNode(0);
             // 初始化链表的长度
             size = 0;
         }
@@ -95,7 +82,8 @@ public class P707DesignLinkedList {
                 return -1;
             }
 
-            LinkedNode curr = dummyHead.next;
+            // 注意此处 curr 第一个节点为真实头结点
+            ListNode curr = dummyHead.next;
             while (index > 0) {
                 curr = curr.next;
                 index--;
@@ -109,9 +97,9 @@ public class P707DesignLinkedList {
          * 在链表最前面插入一个节点，插入完成后，新插入的节点为链表的新的头结点
          */
         public void addAtHead(int val) {
-            LinkedNode newNode = new LinkedNode(val);
+            ListNode newNode = new ListNode(val);
             // 插入节点 三步走
-            LinkedNode temp = dummyHead.next;
+            ListNode temp = dummyHead.next;
             dummyHead.next = newNode;
             newNode.next = temp;
 
@@ -123,8 +111,8 @@ public class P707DesignLinkedList {
          * 在链表最后面添加一个节点
          */
         public void addAtTail(int val) {
-            LinkedNode newNode = new LinkedNode(val);
-            LinkedNode curr = dummyHead;
+            ListNode newNode = new ListNode(val);
+            ListNode curr = dummyHead;
             // 遍历到最后一个节点
             while (curr.next != null) {
                 curr = curr.next;
@@ -146,16 +134,19 @@ public class P707DesignLinkedList {
                 return;
             }
 
-            LinkedNode newNode = new LinkedNode(val);
-            LinkedNode curr = dummyHead;
+            ListNode newNode = new ListNode(val);
+            // 查找index位置的节点
             // 因为多了虚拟头结点，所以由插在原链表index位置的前面 变为 插在新链表(含有虚拟头结点)index位置的后面
+            // 让curr = dummyHead，而非dummyHead.next，这样index位置的节点，实际上是curr.next，而非curr
+            // 目的：无需单独处理头结点，让头结点跟其它节点一样处理
+            ListNode curr = dummyHead;
             while (index > 0) {
                 curr = curr.next;
                 index--;
             }
 
             // 插入节点 三步走
-            LinkedNode temp = curr.next;
+            ListNode temp = curr.next;
             curr.next = newNode;
             newNode.next = temp;
 
@@ -171,7 +162,7 @@ public class P707DesignLinkedList {
                 return;
             }
 
-            LinkedNode curr = dummyHead;
+            ListNode curr = dummyHead;
             while (index > 0) {
                 curr = curr.next;
                 index--;

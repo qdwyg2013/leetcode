@@ -6,18 +6,18 @@ import lombok.Data;
  * 单链表
  */
 @Data
-public class LinkedNode {
+public class ListNode {
 
     /**
      * 节点上存储的元素
      */
-    int val;
+    public int val;
     /**
      * 指向下一个节点的指针
      */
-    LinkedNode next;
+    public ListNode next;
 
-    LinkedNode(int val) {
+    public ListNode(int val) {
         val = val;
     }
 

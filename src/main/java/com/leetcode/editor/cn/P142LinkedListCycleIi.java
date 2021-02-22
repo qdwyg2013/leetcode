@@ -72,20 +72,20 @@ public class P142LinkedListCycleIi {
 
     /**
      * Definition for singly-linked list.
-     * class LinkedNode {
+     * class ListNode {
      * int val;
-     * LinkedNode next;
-     * LinkedNode(int x) {
+     * ListNode next;
+     * ListNode(int x) {
      * val = x;
      * next = null;
      * }
      * }
      */
     public class Solution {
-        public LinkedNode detectCycle(LinkedNode head) {
+        public ListNode detectCycle(ListNode head) {
 
             // 1.哈希表（无重复）
-//        Set<LinkedNode> listNodeSet = new HashSet<>();
+//        Set<ListNode> listNodeSet = new HashSet<>();
 //        while (null != head) {
 //            // 遇到的第一个遍历过的节点必然是入环点
 //            if (listNodeSet.contains(head)) {
@@ -118,8 +118,8 @@ public class P142LinkedListCycleIi {
             }
 
             // 获取快慢指针相遇点
-            LinkedNode slow = head;
-            LinkedNode fast = head;
+            ListNode slow = head;
+            ListNode fast = head;
             while (true) {
                 if (null == fast || null == fast.next) {
                     return null;
@@ -134,7 +134,7 @@ public class P142LinkedListCycleIi {
             }
 
             // 获取入环点
-            LinkedNode ptr = head;
+            ListNode ptr = head;
             while (ptr != slow) {
                 ptr = ptr.next;
                 slow = slow.next;

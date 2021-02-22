@@ -56,20 +56,20 @@ public class P141LinkedListCycle {
 
     /**
      * Definition for singly-linked list.
-     * class LinkedNode {
+     * class ListNode {
      * int val;
-     * LinkedNode next;
-     * LinkedNode(int x) {
+     * ListNode next;
+     * ListNode(int x) {
      * val = x;
      * next = null;
      * }
      * }
      */
     public class Solution {
-        public boolean hasCycle(LinkedNode head) {
+        public boolean hasCycle(ListNode head) {
 
             // 1.哈希表（无重复）
-//            Set<LinkedNode> listNodeSet = new HashSet<>();
+//            Set<ListNode> listNodeSet = new HashSet<>();
 //            while (head != null) {
 //                if (listNodeSet.contains(head)) {
 //                    return true;
@@ -88,8 +88,8 @@ public class P141LinkedListCycle {
             }
 
             // 获取快慢指针相遇点
-            LinkedNode slow = head;
-            LinkedNode fast = head;
+            ListNode slow = head;
+            ListNode fast = head;
             while (true) {
                 // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑null==slow
                 if (null == fast || null == fast.next) {

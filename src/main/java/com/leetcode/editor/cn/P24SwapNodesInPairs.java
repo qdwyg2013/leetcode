@@ -53,28 +53,28 @@ public class P24SwapNodesInPairs {
 
     /**
      * Definition for singly-linked list.
-     * public class LinkedNode {
+     * public class ListNode {
      * int val;
-     * LinkedNode next;
-     * LinkedNode() {}
-     * LinkedNode(int val) { this.val = val; }
-     * LinkedNode(int val, LinkedNode next) { this.val = val; this.next = next; }
+     * ListNode next;
+     * ListNode() {}
+     * ListNode(int val) { this.val = val; }
+     * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
      * }
      */
     class Solution {
-        public LinkedNode swapPairs(LinkedNode head) {
+        public ListNode swapPairs(ListNode head) {
 
             int index = 1;
-            LinkedNode prev = null;
-            LinkedNode curr = head;
-            LinkedNode even = null;
-            LinkedNode odd = head;
+            ListNode prev = null;
+            ListNode curr = head;
+            ListNode even = null;
+            ListNode odd = head;
             while (curr != null) {
                 if (index % 2 == 0) {
-                    LinkedNode tempNode = curr.next;
+                    ListNode tempNode = curr.next;
 
                 } else {
-                    LinkedNode temp = curr.next.next;
+                    ListNode temp = curr.next.next;
                     curr= curr.next;
                     curr.next = temp;
                     prev = curr;
