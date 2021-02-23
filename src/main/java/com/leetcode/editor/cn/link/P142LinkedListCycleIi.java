@@ -55,7 +55,9 @@
 // Related Topics 链表 双指针 
 // 👍 776 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.link;
+
+import com.leetcode.editor.cn.ListNode;
 
 /**
  * java:[142]环形链表 II
@@ -84,63 +86,54 @@ public class P142LinkedListCycleIi {
     public class Solution {
         public ListNode detectCycle(ListNode head) {
 
-            // 1.哈希表（无重复）
-//        Set<ListNode> listNodeSet = new HashSet<>();
-//        while (null != head) {
-//            // 遇到的第一个遍历过的节点必然是入环点
-//            if (listNodeSet.contains(head)) {
-//                return head;
+            // 方法一：哈希表（无重复）
+//            Set<ListNode> listNodeSet = new HashSet<>();
+//            while (null != head) {
+//                // 遇到的第一个遍历过的节点必然是入环点
+//                if (listNodeSet.contains(head)) {
+//                    return head;
+//                }
+//
+//                listNodeSet.add(head);
+//                head = head.next;
 //            }
 //
-//            listNodeSet.add(head);
-//            head = head.next;
-//        }
-//
-//        return null;
+//            return null;
 
 
-            // 2.快慢指针
+            // 方法二：快慢指针
             /*
                 设链表中环外部分的长度为 a
                 slow 指针进入环后，又走了 b 的距离与 fast 相遇（入环后按照顺时针方向走）；相遇点 按顺时针方向距离环入口的距离为 c。所以环周长为 b+c
 
                 假设相遇时 fast 指针已经走完了环的 n 圈，因此 fast 指针走过的总距离为 a+n(b+c)+b = a+(n+1)b+nc
-                因为fast指针走过的路程是slow指针的两倍，所以 a+(n+1)b+nc = 2(a+b)，即a = c+(n−1)(b+c)
+                因为fast指针走过的路程是slow指针的两倍，所以 a+n(b+c)+b = 2(a+b)，即头结点到 环形入口节点的的距离为 a = c+(n−1)(b+c)
                 所以从相遇点到入环点的距离 c 加上 n−1 圈的环长，恰好等于从链表头部到入环点的距离。
 
-                因此，当发现 slow 与 fast 相遇时，我们再额外使用一个指针 ptr。
-                起始，它指向链表头部；
-                随后，ptr 和 slow 每次向后移动一个位置；
-                最终，它们会在入环点相遇 a = c+(n−1)(b+c)
+                因此，当发现 slow 与 fast 相遇时，我们在相遇节点处，定义一个指针index1，在头结点处定一个指针index2。
+                让index1和index2同时移动，每次移动一个节点， 那么他们相遇的地方就是 环形入口的节点。
              */
-            if (null == head || null == head.next) {
-                return null;
-            }
-
-            // 获取快慢指针相遇点
+            // 若有环，则获取快慢指针相遇点
             ListNode slow = head;
             ListNode fast = head;
-            while (true) {
-                if (null == fast || null == fast.next) {
-                    return null;
-                }
-
+            while (null != fast && null != fast.next) {
                 slow = slow.next;
                 fast = fast.next.next;
                 // 获取快慢指针相遇点
                 if (slow == fast) {
-                    break;
+                    // 快慢指针相遇，此时从head 和 相遇点，同时查找直至相遇
+                    ListNode index1 = slow;
+                    ListNode index2 = head;
+                    while (index1 != index2) {
+                        index1 = index1.next;
+                        index2 = index2.next;
+                    }
+                    // 返回环的入口
+                    return index1;
                 }
             }
 
-            // 获取入环点
-            ListNode ptr = head;
-            while (ptr != slow) {
-                ptr = ptr.next;
-                slow = slow.next;
-            }
-
-            return ptr;
+            return null;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

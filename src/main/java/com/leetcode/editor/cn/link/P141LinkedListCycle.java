@@ -39,7 +39,9 @@
 // Related Topics 链表 双指针 
 // 👍 739 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.link;
+
+import com.leetcode.editor.cn.ListNode;
 
 /**
  * java:[141]环形链表
@@ -68,7 +70,7 @@ public class P141LinkedListCycle {
     public class Solution {
         public boolean hasCycle(ListNode head) {
 
-            // 1.哈希表（无重复）
+            // 方法一：哈希表（无重复）
 //            Set<ListNode> listNodeSet = new HashSet<>();
 //            while (head != null) {
 //                if (listNodeSet.contains(head)) {
@@ -82,19 +84,13 @@ public class P141LinkedListCycle {
 //            return false;
 
 
-            // 2.双指针-快慢指针
-            if (null == head || null == head.next) {
-                return false;
-            }
-
+            // 方法二：双指针-快慢指针
+            // 分别定义 fast 和 slow指针，从头结点出发，fast指针每次移动两个节点，slow指针每次移动一个节点，如果 fast 和 slow指针在途中相遇 ，说明这个链表有环。
             // 获取快慢指针相遇点
             ListNode slow = head;
             ListNode fast = head;
-            while (true) {
-                // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑null==slow
-                if (null == fast || null == fast.next) {
-                    return false;
-                }
+            // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑slow==null
+            while (null != fast && null != fast.next) {
                 // 前进一个节点
                 slow = slow.next;
                 // 前进两个节点
@@ -102,11 +98,11 @@ public class P141LinkedListCycle {
 
                 // 获取快慢指针相遇点
                 if (slow == fast) {
-                    break;
+                    return true;
                 }
             }
 
-            return true;
+            return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
