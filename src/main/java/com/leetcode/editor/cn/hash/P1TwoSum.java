@@ -14,9 +14,8 @@
 // Related Topics 数组 哈希表 
 // 👍 8953 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.hash;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +44,7 @@ public class P1TwoSum {
 //            }
 //            return null;
 
-            // 2.哈希表 HashMap
+            // 2.hash解法：map
             // 因为返回的是下标值，所以不能排序打乱顺序
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < nums.length; i++) {
@@ -53,6 +52,7 @@ public class P1TwoSum {
                 if (map.containsKey(complement)) {
                     return new int[]{map.get(complement), i};
                 }
+                // 使用map<数值，下标>
                 map.put(nums[i], i);
             }
 

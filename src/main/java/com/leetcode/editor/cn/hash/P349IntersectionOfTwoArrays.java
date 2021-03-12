@@ -44,8 +44,10 @@ public class P349IntersectionOfTwoArrays {
     class Solution {
         public int[] intersection(int[] nums1, int[] nums2) {
 
-            // 方法1：set集合
-            // O(m+n) 其中 m 和 n 是两个数组的长度
+            // 方法：hash解法：set
+            /*
+                时间复杂度为O(m+n) —— m和n是两个数组的长度
+             */
             Set<Integer> resultSet = new HashSet<>();
             // nums1去重
             Set<Integer> nums1Set = new HashSet<>();

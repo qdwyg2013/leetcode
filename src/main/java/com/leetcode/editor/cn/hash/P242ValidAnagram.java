@@ -49,7 +49,11 @@ public class P242ValidAnagram {
 //            Arrays.sort(tChars);
 //            return Arrays.equals(sChars, tChars);
 
-            // 方法二：数组
+            // 方法二：hash解法：数组
+            /*
+                时间复杂度为O(n)
+                空间复杂度为O(1) —— 因为定义是的一个常量大小的辅助数组，所以空间复杂度为O(1)
+             */
             // 因为字符a到字符z的ASCII是26个连续的数值，所以定义数组的长度为26，字符a映射为下表0，相应的字符z映射为下表25
             int[] record = new int[26];
 
@@ -72,7 +76,7 @@ public class P242ValidAnagram {
             // record数组所有元素都为零0，说明字符串s和t是字母异位词
             return true;
 
-            // 2.哈希表
+            // 2.hash解法：map
 //            // 加 +
 //            Map<Character, Integer> sMap = new HashMap<>();
 //            for (int i = 0; i < s.length(); i++) {
