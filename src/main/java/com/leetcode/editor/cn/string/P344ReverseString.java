@@ -19,7 +19,7 @@
 // Related Topics 双指针 字符串 
 // 👍 265 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.string;
 
 import java.util.Arrays;
 
@@ -40,10 +40,11 @@ public class P344ReverseString {
     class Solution {
         public void reverseString(char[] s) {
 
-            // 双指针法
+            // 方法：双指针法
             int i = 0;
             int j = s.length - 1;
             while (i < j) {
+                // 两数交换
                 char temp = s[i];
                 s[i] = s[j];
                 s[j] = temp;

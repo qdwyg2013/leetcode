@@ -1,11 +1,8 @@
 package com.leetcode.editor.cn;
 
-import lombok.Data;
-
 /**
  * 单链表
  */
-@Data
 public class ListNode {
 
     /**

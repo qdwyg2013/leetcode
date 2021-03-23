@@ -90,6 +90,7 @@ public class P27RemoveElement {
             // 空间复杂度：O(1)
             int slowIndex = 0;
             for (int fastIndex = 0; fastIndex < nums.length; fastIndex++) {
+                // 将不等于val的左移
                 if (nums[fastIndex] != val) {
                     // 因为在出现等于val之前slowIndex==fastIndex，所以无需赋值操作nums[slowIndex] = nums[fastIndex]
                     if (fastIndex > slowIndex) {

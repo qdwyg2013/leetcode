@@ -89,6 +89,7 @@ public class P141LinkedListCycle {
             // 获取快慢指针相遇点
             ListNode slow = head;
             ListNode fast = head;
+            // 因为环最少3个节点，所以无需考虑3个以下节点的情况
             // 只有第一个节点slow、fast才有可能同时为null。之后必然fast先为null，所以此处无需考虑slow==null
             while (null != fast && null != fast.next) {
                 // 前进一个节点

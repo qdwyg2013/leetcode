@@ -47,14 +47,14 @@ import com.leetcode.editor.cn.ListNode;
 public class P707DesignLinkedList {
 
     public static void main(String[] args) {
-        MyLinkedList solution = new P707DesignLinkedList().new MyLinkedList();
-        // TO TEST
-        solution.addAtHead(1);
-        solution.addAtTail(3);
-        solution.addAtIndex(1, 2);
-        solution.get(1);
-        solution.deleteAtIndex(1);
-        solution.get(1);
+//        MyLinkedList solution = new P707DesignLinkedList().new MyLinkedList();
+//        // TO TEST
+//        solution.addAtHead(1);
+//        solution.addAtTail(3);
+//        solution.addAtIndex(1, 2);
+//        solution.get(1);
+//        solution.deleteAtIndex(1);
+//        solution.get(1);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -134,7 +134,6 @@ public class P707DesignLinkedList {
                 return;
             }
 
-            ListNode newNode = new ListNode(val);
             // 查找index位置的节点
             // 因为多了虚拟头结点，所以由插在原链表index位置的前面 变为 插在新链表(含有虚拟头结点)index位置的后面
             // 让curr = dummyHead，而非dummyHead.next，这样index位置的节点，实际上是curr.next，而非curr
@@ -145,6 +144,7 @@ public class P707DesignLinkedList {
                 index--;
             }
 
+            ListNode newNode = new ListNode(val);
             // 插入节点 三步走
             ListNode temp = curr.next;
             curr.next = newNode;

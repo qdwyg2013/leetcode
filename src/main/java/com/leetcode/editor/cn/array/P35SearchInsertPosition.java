@@ -68,52 +68,22 @@ public class P35SearchInsertPosition {
             // 方法二：二分法 O(logn)
             // 只要看到面试题里给出的数组是有序数组，都可以想一想是否可以使用二分法。
             // 题中让“你可以假设数组中无重复元素。 ”，否则会又多个下标
-//            // 二分法1：左闭右闭
-//            // 时间复杂度：O(logn)
-//            // 空间复杂度：O(1)
-//            // 定义target在左闭右闭的区间里，[left, right]
-//            int left = 0;
-//            int right = nums.length - 1;
-//            // 当left==right，区间[left, right]依然有效
-//            while (left <= right) {
-//                // 防止溢出 等同于(left + right)/2
-//                int middle = left + (right - left) / 2;
-//                if (nums[middle] < target) {
-//                    // target 在右区间，所以[middle + 1, right]
-//                    left = middle + 1;
-//                } else if (nums[middle] > target) {
-//                    // target 在左区间，所以[left, middle - 1]
-//                    right = middle - 1;
-//                } else {
-//                    // 数组中找到目标值的情况，直接返回下标  nums[middle] == target
-//                    return middle;
-//                }
-//            }
-//
-//            /*
-//                分别处理如下四种情况
-//                1.目标值在数组所有元素之前  [0, -1]，return  right + 1
-//                2.目标值等于数组中某一个元素  return middle;
-//                3.目标值插入数组中的位置 [left, right]，return  right + 1
-//                4.目标值在数组所有元素之后的情况 [left, right]， return right + 1
-//            */
-//            return right + 1;
-
-            // 二分法2：左闭右开
-//            // 时间复杂度：O(logn)
-//            // 空间复杂度：O(1)
-            // 定义target在左闭右开的区间里，[left, right)  target
+            // 二分法1：左闭右闭
+            // 时间复杂度：O(logn)
+            // 空间复杂度：O(1)
+            // 定义target在左闭右闭的区间里，[left, right]
             int left = 0;
-            int right = nums.length;
-            // 因为left == right的时候，在[left, right)是无效的空间
-            while (left < right) {
+            int right = nums.length - 1;
+            // 当left==right，区间[left, right]依然有效
+            while (left <= right) {
+                // 防止溢出 等同于(left + right)/2
                 int middle = left + (right - left) / 2;
                 if (nums[middle] < target) {
-                    // target 在右区间，在 [middle+1, right)中
+                    // target 在右区间，所以[middle + 1, right]
                     left = middle + 1;
                 } else if (nums[middle] > target) {
-                    // target 在左区间，在[left, middle)中
-                    right = middle;
+                    // target 在左区间，所以[left, middle - 1]
+                    right = middle - 1;
                 } else {
                     // 数组中找到目标值的情况，直接返回下标  nums[middle] == target
                     return middle;
@@ -122,12 +92,42 @@ public class P35SearchInsertPosition {
 
             /*
                 分别处理如下四种情况
-                1.目标值在数组所有元素之前  [0, 0]，return  right
+                1.目标值在数组所有元素之前  [0, -1]，return  right + 1
                 2.目标值等于数组中某一个元素  return middle;
-                3.目标值插入数组中的位置 [left, right)，return  right
-                4.目标值在数组所有元素之后的情况 [left, right)， return right
+                3.目标值插入数组中的位置 [left, right]，return  right + 1
+                4.目标值在数组所有元素之后的情况 [left, right]， return right + 1
             */
-            return right;
+            return right + 1;
+
+            // 二分法2：左闭右开
+//            // 时间复杂度：O(logn)
+//            // 空间复杂度：O(1)
+//            // 定义target在左闭右开的区间里，[left, right)  target
+//            int left = 0;
+//            int right = nums.length;
+//            // 因为left == right的时候，在[left, right)是无效的空间
+//            while (left < right) {
+//                int middle = left + (right - left) / 2;
+//                if (nums[middle] < target) {
+//                    // target 在右区间，在 [middle+1, right)中
+//                    left = middle + 1;
+//                } else if (nums[middle] > target) {
+//                    // target 在左区间，在[left, middle)中
+//                    right = middle;
+//                } else {
+//                    // 数组中找到目标值的情况，直接返回下标  nums[middle] == target
+//                    return middle;
+//                }
+//            }
+//
+//            /*
+//                分别处理如下四种情况
+//                1.目标值在数组所有元素之前  [0, 0]，return  right
+//                2.目标值等于数组中某一个元素  return middle;
+//                3.目标值插入数组中的位置 [left, right)，return  right
+//                4.目标值在数组所有元素之后的情况 [left, right)， return right
+//            */
+//            return right;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
