@@ -52,8 +52,10 @@
 // Related Topics 栈 树 
 // 👍 472 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.tree;
 
+
+import com.leetcode.editor.cn.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,14 +93,14 @@ public class P144BinaryTreePreorderTraversal {
 
         public List<Integer> preorderTraversal(TreeNode root) {
             List<Integer> result = new ArrayList<>();
+
+            // 方法一：递归
+//            traversal(root, result);
+
+            // 方法二：迭代 - 栈
             if (null == root) {
                 return result;
             }
-
-            // 方法一：递归
-//            inorders(root, result);
-
-            // 方法二：迭代 - 栈
             Stack<TreeNode> stack = new Stack<>();
             // 入栈：根 + 右 - 左；出栈：根 + 左 - 右
             // 根节点入栈
@@ -117,13 +119,12 @@ public class P144BinaryTreePreorderTraversal {
                 if (null != node.left) {
                     stack.push(node.left);
                 }
-
             }
 
             return result;
         }
 
-        private void inorders(TreeNode root, List<Integer> result) {
+        private void traversal(TreeNode root, List<Integer> result) {
 
             // recursion termination
             if (null == root) {
@@ -135,8 +136,8 @@ public class P144BinaryTreePreorderTraversal {
             result.add(root.val);
 
             // drill down
-            inorders(root.left, result);
-            inorders(root.right, result);
+            traversal(root.left, result);
+            traversal(root.right, result);
 
             // reverse the current level status if needed
 

@@ -15,7 +15,9 @@
 // Related Topics 栈 树
 // 👍 486 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.tree;
+
+import com.leetcode.editor.cn.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,39 +55,40 @@ public class P145BinaryTreePostorderTraversal {
         public List<Integer> postorderTraversal(TreeNode root) {
             List<Integer> result = new ArrayList<>();
 
-            if (null == root) {
-                return result;
-            }
-
             // 方法一：递归
-//            inorders(root, result);
+//            traversal(root, result);
 
             // 方法二：迭代 - 栈
             /*
                 前序遍历：根-左-右
-                入栈时 根 + 右 - 左；出栈 根 + 左 - 右 （根提前处理）
+                入栈 根 + 右 + 左；
+                出栈 根 - 左 - 右 （根提前处理）
 
                 后序遍历：左-右-根
-                入栈时 根 + 左 - 右；出栈 右 - 左 - 根 （根不提前处理）
+                入栈 根 + 左 + 右；
+                出栈 右 - 左 - 根 （根不提前处理）
              */
+            if (null == root) {
+                return result;
+            }
 
-            Stack<TreeNode> stack1 = new Stack<>();
-            stack1.push(root);
-
+            Stack<TreeNode> stack = new Stack<>();
+            stack.push(root);
+            // stack2目的是存储正序结果集，用于后面出栈反转
             Stack<TreeNode> stack2 = new Stack<>();
-            while (!stack1.isEmpty()) {
-                TreeNode node = stack1.pop();
+            while (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
 
-                // 入结果栈。根 + 左 - 右
+                // 入结果栈。根 + 左 + 右
                 stack2.push(node);
 
                 // 左 入栈
                 if (null != node.left) {
-                    stack1.push(node.left);
+                    stack.push(node.left);
                 }
                 // 右 入栈
                 if (null != node.right) {
-                    stack1.push(node.right);
+                    stack.push(node.right);
                 }
             }
 
@@ -97,7 +100,7 @@ public class P145BinaryTreePostorderTraversal {
             return result;
         }
 
-        private void inorders(TreeNode root, List<Integer> result) {
+        private void traversal(TreeNode root, List<Integer> result) {
 
             // recursion termination
             if (null == root) {
@@ -108,8 +111,8 @@ public class P145BinaryTreePostorderTraversal {
             // process login in current level
 
             // drill down
-            inorders(root.left, result);
-            inorders(root.right, result);
+            traversal(root.left, result);
+            traversal(root.right, result);
 
             result.add(root.val);
 

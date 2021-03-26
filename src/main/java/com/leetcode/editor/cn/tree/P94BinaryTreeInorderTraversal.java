@@ -15,10 +15,11 @@
 // Related Topics 栈 树 哈希表 
 // 👍 759 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.tree;
+
+import com.leetcode.editor.cn.TreeNode;
 
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 import java.util.Stack;
 
@@ -55,38 +56,40 @@ public class P94BinaryTreeInorderTraversal {
         public List<Integer> inorderTraversal(TreeNode root) {
             List<Integer> result = new ArrayList<>();
 
+            // 方法一：递归
+//            traversal(root, result);
+
+            // 方法二：迭代 —— 栈
             if (null == root) {
                 return result;
             }
 
-            // 方法一：递归
-//            inorders(root, result);
-
-            // 方法二：迭代 —— 栈
             Stack<TreeNode> stack = new Stack<>();
             TreeNode curr = root;
             while (!stack.isEmpty() || curr != null) {
-                // 找到最左节点 放入栈中
-                while (curr != null) {
+                if (curr != null) {
+                    // 指针来访问节点，访问到最底层，即直到最左节点 放入栈中
+                    // 将访问的节点放进栈
                     stack.push(curr);
                     curr = curr.left;
+                } else {
+                    // 中
+                    // 从栈里弹出的数据，就是要处理的数据（放进result数组里的数据）
+                    curr = stack.pop();
+                    // 存入结果集
+                    result.add(curr.val);
+
+                    // 右
+                    // 找到当前节点的右节点
+                    curr = curr.right;
                 }
 
-                TreeNode node = stack.pop();
-                // 存入结果集
-                result.add(node.val);
-
-                // 找到当前节点的右节点
-                if (null != node.right) {
-                    curr = node.right;
-                }
             }
-
 
             return result;
         }
 
-        public void inorders(TreeNode root, List<Integer> result) {
+        public void traversal(TreeNode root, List<Integer> result) {
             // root节点为null，则结束迭代
             if (null == root) {
                 return;
@@ -94,11 +97,11 @@ public class P94BinaryTreeInorderTraversal {
 
             // 中序遍历：左-根-右
             // 遍历左节点
-            inorders(root.left, result);
+            traversal(root.left, result);
             // 左节点为null时，将根root节点值添加到result集合中
             result.add(root.val);
             // 遍历右节点
-            inorders(root.right, result);
+            traversal(root.right, result);
         }
 
 
