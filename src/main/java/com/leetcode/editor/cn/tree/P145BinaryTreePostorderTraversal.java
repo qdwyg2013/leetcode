@@ -66,21 +66,22 @@ public class P145BinaryTreePostorderTraversal {
 
                 后序遍历：左-右-根
                 入栈 根 + 左 + 右；
-                出栈 右 - 左 - 根 （根不提前处理）
+                出栈 根 - 右 - 左 （根不提前处理）
+                反转 左 - 右 - 根
              */
             if (null == root) {
                 return result;
             }
 
+            // ascResultStack 存储正序结果集，用于后面出栈反转
+            Stack<TreeNode> ascResultStack = new Stack<>();
+            
             Stack<TreeNode> stack = new Stack<>();
             stack.push(root);
-            // stack2目的是存储正序结果集，用于后面出栈反转
-            Stack<TreeNode> stack2 = new Stack<>();
             while (!stack.isEmpty()) {
                 TreeNode node = stack.pop();
-
-                // 入结果栈。根 + 左 + 右
-                stack2.push(node);
+                // 存入正序结果集
+                ascResultStack.push(node);
 
                 // 左 入栈
                 if (null != node.left) {
@@ -93,8 +94,8 @@ public class P145BinaryTreePostorderTraversal {
             }
 
             // 结果栈数据反转
-            while (!stack2.isEmpty()) {
-                result.add(stack2.pop().val);
+            while (!ascResultStack.isEmpty()) {
+                result.add(ascResultStack.pop().val);
             }
 
             return result;

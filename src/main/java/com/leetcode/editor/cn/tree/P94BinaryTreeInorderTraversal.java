@@ -83,7 +83,6 @@ public class P94BinaryTreeInorderTraversal {
                     // 找到当前节点的右节点
                     curr = curr.right;
                 }
-
             }
 
             return result;
