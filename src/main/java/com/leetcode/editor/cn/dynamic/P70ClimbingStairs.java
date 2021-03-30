@@ -33,7 +33,7 @@
 // Related Topics 动态规划 
 // 👍 1216 👎 0
 
-package com.leetcode.editor.cn;
+package com.leetcode.editor.cn.dynamic;
 
 /**
  * java:[70]爬楼梯
@@ -43,43 +43,32 @@ public class P70ClimbingStairs {
     public static void main(String[] args) {
         Solution solution = new P70ClimbingStairs().new Solution();
         // TO TEST
-        System.out.println(solution.iteration(5));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int climbStairs(int n) {
 
-            // 斐波那契数列 f(n) = f(n-1) + f(n-2)
-            if (n < 3) {
+            // 方法：斐波那契数列 f(n) = f(n-1) + f(n-2)
+            if (n <= 1) {
                 return n;
             }
-            int f1 = 1, f2 = 2, f3 = 0;
-            // n 仅用于记录计算到第几阶楼梯了，循环内部的逻辑与 n 无关
+
+            // 1.确定dp数组以及下标的含义
+            int[] dp = new int[3];
+            // 3.dp数组初始化——因为dp[0]为零级台阶，没有任何意义，所以此处从一级台阶dp[1]开始
+            dp[1] = 1;
+            dp[2] = 2;
+            // 4.确定遍历顺序——从前往后。dp[3] = dp[2] + dp[1]，所以 i 从3开始遍历
             for (int i = 3; i <= n; i++) {
-                f3 = f1 + f2;
-                f1 = f2;
-                f2 = f3;
+                // 2.确定递推公式
+                int sum = dp[1] + dp[2];
+                dp[1] = dp[2];
+                dp[2] = sum;
             }
 
-            return f3;
+            return dp[2];
 
-        }
-
-        /**
-         * 迭代的方式
-         */
-        private int iteration(int n) {
-            System.out.println("--------" + n);
-            if (n == 1) {
-                return 1;
-            }
-            if (n == 2) {
-                return 2;
-            }
-
-            int result = iteration(n - 1) + iteration(n - 2);
-            return result;
         }
 
     }

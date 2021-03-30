@@ -102,8 +102,8 @@ public class P144BinaryTreePreorderTraversal {
                 return result;
             }
             Stack<TreeNode> stack = new Stack<>();
-            // 入栈：根 + 右 - 左 （根提前处理）
-            // 出栈：根 + 左 - 右
+            // 入栈：根 + 右 + 左 （根提前处理）
+            // 出栈：根 - 左 - 右
             // 根节点入栈
             stack.push(root);
             while (!stack.isEmpty()) {
